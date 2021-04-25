@@ -1,3 +1,8 @@
+local Text = {"HAHA GET OWNED NOOBS",
+"I AM A NICE, FRIENDLY HACKER",
+"Script written by: DILLY",
+"BAN ME DADDY"
+}
 _aWKzMIfmf4K79HDd, Protected_by_MoonSecV2, Discord = 'discord.gg/gQEH2uZxUk'
 
 
