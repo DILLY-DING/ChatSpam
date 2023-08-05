@@ -1,19 +1,37 @@
+#pip install pywin32
+
+
+window_count = 0
+
 def main():
-    window1 = get_hwnd("Keyboard Test Online - Google Chrome")
+
+    #create_window("PASTE_EXACT_WINDOW_NAME_HERE")
+
+    sleep(3)
+    while True:
+        press_key(window1C, "A", 0)
+        sleep(1)
+        press_key(window2C, "B", 0)
+        sleep(1)
+        press_key(window3C, "C", 0)
+        sleep(1)
+        press_key(window4C, "D", 0)
+        sleep(1)
+        press_key(window5C, "E", 0)
+        sleep(1)
 
 
 
-    while True:        
-        press_key(window1, "A", 0.1)
-        sleep(0.2)
 
 
 
 
-
-
-
-
+def create_window(window_name):
+    global window_count
+    window_count += 1
+    hwnd, hwndChild = get_hwnd(window_name)
+    globals()[f'window{window_count}'] = hwnd
+    globals()[f'window{window_count}C'] = hwndChild
 
 
 
@@ -49,6 +67,7 @@ def find_all_windows(name):
 def press_key(focused_window, key, duration):
     if (GetForegroundWindow()) != focused_window:
         focus_window(focused_window)
+        sleep(0.2)
     if duration == 0:
         win32api.PostMessage(focused_window, win32con.WM_CHAR, keys[key], 0)
     else:
@@ -67,7 +86,7 @@ def get_hwnd(name):
     hwnd = hwnds[0]
     hwndChild = win32gui.GetWindow(hwnd, win32con.GW_CHILD)
     print("Child HWND: ", hwndChild, "\n")
-    return hwnd
+    return hwnd, hwndChild
 
 
 
