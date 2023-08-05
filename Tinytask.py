@@ -1,35 +1,10 @@
-from time import sleep, time
-import win32gui, win32ui, win32api, win32con
-from win32con import (SW_SHOW, SW_RESTORE)
-import win32com.client
-
-
 def main():
-    window_name1 = "Keyboard Test Online - Google Chrome"
-    window1 = get_hwnd(window_name1)
-    #child1 = hwndChild
-    
+    window1 = get_hwnd("Keyboard Test Online - Google Chrome")
 
 
-    sleep(1)
 
-    while True:
-        focus_window(window1)
-
-        sleep(1)
-        press_key(child1, D, 0.2)
-        sleep(0.2)
-        press_key(window1, I, 0.2)
-        sleep(0.2)
-        press_key(window1, S, 0.2)
-        sleep(0.2)
-        press_key(window1, C, 0.2)
-        sleep(0.2)
-        press_key(window1, O, 0.2)
-        sleep(0.2)
-        press_key(window1, R, 0.2)
-        sleep(0.2)
-        press_key(window1, D, 0.2)
+    while True:        
+        press_key(window1, "A", 0.1)
         sleep(0.2)
 
 
@@ -37,35 +12,9 @@ def main():
 
 
 
-hwnd = None
 
-A = 0x41
-B = 0x42
-C = 0x43
-D = 0x44
-E = 0x45
-F = 0x46
-G = 0x47
-H = 0x48
-I = 0x49
-J = 0x4A
-K = 0x4B
-L = 0x4C
-M = 0x4D
-N = 0x4E
-O = 0x4F
-P = 0x50
-Q = 0x51
-R = 0x52
-S = 0x53
-T = 0x54
-U = 0x55
-V = 0x56
-W = 0x57
-X = 0x58
-Y = 0x59
-Z = 0x5A
-SPACE = 0x20
+
+
 
 
 def list_window_names():
@@ -97,15 +46,17 @@ def find_all_windows(name):
 
 
 
-def press_key(window, key, duration):
+def press_key(focused_window, key, duration):
+    if (GetForegroundWindow()) != focused_window:
+        focus_window(focused_window)
     if duration == 0:
-        win32api.PostMessage(window, win32con.WM_CHAR, key, 0)
+        win32api.PostMessage(focused_window, win32con.WM_CHAR, keys[key], 0)
     else:
-        win32api.PostMessage(window, win32con.WM_KEYDOWN, key, 0)
+        win32api.PostMessage(focused_window, win32con.WM_KEYDOWN, keys[key], 0)
         sleep(duration)
-        win32api.PostMessage(window, win32con.WM_KEYUP, key, 0)
+        win32api.PostMessage(focused_window, win32con.WM_KEYUP, keys[key], 0)
 
-    print("Pressed ", key)
+    print("Pressed ", chr(keys[key]))
 
 
 
@@ -121,15 +72,26 @@ def get_hwnd(name):
 
 
 def focus_window(no):
-    print("\n\nFocusing window: ", no)
+    print("\n\nFocusing window: ", GetWindowText(no))
 
     win32gui.ShowWindow(no, win32con.SW_RESTORE)
     shell = win32com.client.Dispatch("WScript.Shell")
     shell.SendKeys('%')
-    win32gui.SetForegroundWindow(no)   
+    win32gui.SetForegroundWindow(no)
 
 #list_window_names()
 #get_inner_windows(hwnd1)
+
+from time import sleep, time
+import win32gui, win32ui, win32api, win32con, win32com.client
+from win32con import (SW_SHOW, SW_RESTORE)
+from win32gui import GetWindowText, GetForegroundWindow
+
+hwnd = None
+keys = {'A': 0x41, 'B': 0x42, 'C': 0x43, 'D': 0x44, 'E': 0x45, 'F': 0x46, 'G': 0x47, 'H': 0x48, 'I': 0x49, 'J': 0x4A, 'K': 0x4B, 'L': 0x4C, 'M': 0x4D, 'N': 0x4E, 'O': 0x4F, 'P': 0x50, 'Q': 0x51, 'R': 0x52, 'S': 0x53, 'T': 0x54, 'U': 0x55, 'V': 0x56, 'W': 0x57, 'X': 0x58, 'Y': 0x59, 'Z': 0x5A, 'SPACE': 0x20}
+
+
+
 
 
 main()
