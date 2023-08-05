@@ -3,7 +3,40 @@ import win32gui, win32ui, win32api, win32con
 from win32con import (SW_SHOW, SW_RESTORE)
 import win32com.client
 
-window_name = "@MRTOOGLE - Discord"
+
+def main():
+    window_name1 = "Keyboard Test Online - Google Chrome"
+    window1 = get_hwnd(window_name1)
+    #child1 = hwndChild
+    
+
+
+    sleep(1)
+
+    while True:
+        focus_window(window1)
+
+        sleep(1)
+        press_key(child1, D, 0.2)
+        sleep(0.2)
+        press_key(window1, I, 0.2)
+        sleep(0.2)
+        press_key(window1, S, 0.2)
+        sleep(0.2)
+        press_key(window1, C, 0.2)
+        sleep(0.2)
+        press_key(window1, O, 0.2)
+        sleep(0.2)
+        press_key(window1, R, 0.2)
+        sleep(0.2)
+        press_key(window1, D, 0.2)
+        sleep(0.2)
+
+
+
+
+
+
 hwnd = None
 
 A = 0x41
@@ -93,60 +126,10 @@ def focus_window(no):
     win32gui.ShowWindow(no, win32con.SW_RESTORE)
     shell = win32com.client.Dispatch("WScript.Shell")
     shell.SendKeys('%')
-    win32gui.SetForegroundWindow(no)
-
-    
-    
+    win32gui.SetForegroundWindow(no)   
 
 #list_window_names()
 #get_inner_windows(hwnd1)
 
 
-window_name1 = "Keyboard Test Online - Google Chrome"
-window1 = get_hwnd(window_name1)
-child1 = hwndChild
-
-
-sleep(1)
-
-while True:
-    focus_window(window1)
-
-    sleep(1)
-    press_key(child1, D, 0.2)
-    sleep(0.2)
-    press_key(window1, I, 0.2)
-    sleep(0.2)
-    press_key(window1, S, 0.2)
-    sleep(0.2)
-    press_key(window1, C, 0.2)
-    sleep(0.2)
-    press_key(window1, O, 0.2)
-    sleep(0.2)
-    press_key(window1, R, 0.2)
-    sleep(0.2)
-    press_key(window1, D, 0.2)
-    sleep(0.2)
-
-
-"""
-    chrome_window_name = "Keyboard Test Online - Google Chrome"
-    chrome_window = get_hwnd(chrome_window_name)
-    chrome_child = hwndChild
-
-    focus_window(chrome_window)
-
-    sleep(0.2)
-    press_key(chrome_window, C,)
-    sleep(0.2)
-    press_key(chrome_window, H,)
-    sleep(0.2)
-    press_key(chrome_window, R,)
-    sleep(0.2)
-    press_key(chrome_window, O,)
-    sleep(0.2)
-    press_key(chrome_window, M,)
-    sleep(0.2)
-    press_key(chrome_window, E,)
-    sleep(1)
-"""
+main()
