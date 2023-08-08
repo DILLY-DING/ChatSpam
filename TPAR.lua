@@ -1,11 +1,7 @@
 function tpar(plrname)
     repeat wait() until game:IsLoaded()
 
-
-    wait(0.5)
     game:GetService("ReplicatedStorage"):WaitForChild("SetReplicationFocusOverride"):FireServer(false)
-
-    wait(0.23)
 
     local ts = game:GetService("TeleportService")
     local p = game:GetService("Players").LocalPlayer
@@ -88,7 +84,7 @@ function tpar(plrname)
             queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/DILLY-DING/Roblox-scripts/main/TPAR.lua"))()')
             ts:Teleport(game.PlaceId, p)
         end
-        wait(0.2)
+        wait(0.1)
     end
 end
 
