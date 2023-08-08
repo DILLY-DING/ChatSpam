@@ -1,4 +1,4 @@
-function tpar()
+function tpar(plrname)
     repeat wait() until game:IsLoaded()
 
 
