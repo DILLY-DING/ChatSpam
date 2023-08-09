@@ -1,4 +1,10 @@
 function tpar(plrname)
+
+    local RunService = game:GetService'RunService'
+
+    RunService:Set3dRenderingEnabled(false)
+    settings().Rendering.QualityLevel = 0
+    
     repeat wait() until game:IsLoaded()
 
     game:GetService("ReplicatedStorage"):WaitForChild("SetReplicationFocusOverride"):FireServer(false)
@@ -14,23 +20,6 @@ function tpar(plrname)
         local workspace = game:GetService("Workspace")
         local target = game:GetService("Players"):FindFirstChild(plrname).Character:FindFirstChild("HumanoidRootPart")
 
-        local function isQKeyPressed()
-            return game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Q)
-        end
-        
-        
-        
-        
-
-
-        function instanttp(plrname)
-            player.Character.HumanoidRootPart.CFrame = players:FindFirstChild(plrname).Character.HumanoidRootPart.CFrame
-        end
-
-        function gravity(set)
-            workspace.Gravity = tonumber(set) or 196.2
-        end
-
         function ragdoll() 
             local oldIsPointInTag
             tagUtils.isPointInTag = function(point, tag)
@@ -44,16 +33,11 @@ function tpar(plrname)
         ragdoll()
 
         local part = player.Character:FindFirstChild("HumanoidRootPart")
-
-        if not part then
-            return
-        end
         
         local y_level = 500
         local target_position = target.Position
         local higher_position = Vector3.new(target_position.X, y_level, target_position.Z)
         local speed = 150
-        
         
         local function isConditionMet(currentPos, targetPos)
             return (currentPos - targetPos).Magnitude < 10
@@ -65,15 +49,17 @@ function tpar(plrname)
             wait()
         
             part.CFrame = CFrame.new(part.Position.X, y_level, part.Position.Z)
-        
-            
-            if isQKeyPressed() then
-                break
-            end
         until isConditionMet(part.Position, higher_position)
         
         part.CFrame = CFrame.new(part.Position.X, target_position.Y, part.Position.Z)
         part.Velocity = Vector3.new(0, 0, 0)
+
+        player.Character.HumanoidRootPart.CFrame = players:FindFirstChild(plrname).Character.HumanoidRootPart.CFrame
+
+        local vim = game:GetService("VirtualInputManager")
+        vim:SendKeyEvent(true, Enum.KeyCode.F, false, nil)
+        task.wait(0.005)
+        vim:SendKeyEvent(false, Enum.KeyCode.F, false, nil)
         
     end
 
