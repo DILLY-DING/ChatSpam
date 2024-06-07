@@ -75,4 +75,4 @@ function tpar(plrname)
 end
 
 print("Rejoined!!")
-tpar("MRTOOGLE_A10")
+tpar("MRTOOGLE_4g25d")
