@@ -68,7 +68,7 @@ function tpar(plrname)
     while true do
         if game:GetService("Players").LocalPlayer.Folder:FindFirstChild("Cuffed") then
             queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/DILLY-DING/Roblox-scripts/main/TPAR.lua"))()')
-            ts:Teleport(game.PlaceId, p)
+            game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
         end
         wait(0.1)
     end
